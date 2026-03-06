@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerald City Ortho – 正畸治疗全流程指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald: #1a6b4a;
+    --emerald-mid: #2d8b62;
+    --emerald-light: #3dab78;
+    --emerald-pale: #e8f5ee;
+    --emerald-glow: #a8dfc0;
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --dark: #0d1f16;
+    --text: #1c2e22;
+    --muted: #5a7a65;
+    --white: #fdfef9;
+    --card-bg: #ffffff;
+    --line: #c5e0d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--white);
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--dark);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -20%, #2d8b6255 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 110%, #c9a84c22 0%, transparent 60%);
+  }
+  .header-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--emerald-mid), var(--emerald-light));
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .header h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(26px, 5vw, 48px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.2;
+    position: relative;
+    letter-spacing: 2px;
+  }
+  .header h1 span {
+    color: var(--gold-light);
+  }
+  .header-sub {
+    margin-top: 14px;
+    color: var(--emerald-glow);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .header-deco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .header-deco span {
+    display: block;
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--emerald-glow));
+  }
+  .header-deco span:last-child {
+    background: linear-gradient(90deg, var(--emerald-glow), transparent);
+  }
+  .header-deco i { color: var(--gold-light); font-style: normal; font-size: 20px; }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip {
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-mid));
+    color: #fff;
+    padding: 20px 32px;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 48px;
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: center;
+    box-shadow: 0 8px 32px #1a6b4a33;
+  }
+  .intro-strip strong { color: var(--gold-light); }
+
+  /* ── PAGE ── */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+
+  .section-label {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .section-label h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--emerald);
+    letter-spacing: 2px;
+  }
+  .section-label p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── STEP CARDS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0 20px;
+    position: relative;
+  }
+  .step-row:not(:last-child) .step-spine::after {
+    content: '';
+    position: absolute;
+    left: 35px;
+    top: 72px;
+    bottom: -28px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--emerald-light), var(--line));
+    z-index: 0;
+  }
+
+  .step-spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 16px;
+  }
+
+  .step-num {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-mid));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700;
+    font-size: 20px;
+    box-shadow: 0 4px 18px #1a6b4a44;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    border: 3px solid var(--white);
+    outline: 2px solid var(--emerald-light);
+  }
+  .step-num.gold {
+    background: linear-gradient(135deg, #b8872a, var(--gold));
+    outline-color: var(--gold-light);
+    box-shadow: 0 4px 18px #c9a84c44;
+  }
+
+  .step-body {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 26px 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 16px #1a6b4a0a;
+    transition: box-shadow .2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .step-body::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--emerald-light), var(--emerald));
+    border-radius: 4px 0 0 4px;
+  }
+  .step-body.gold-accent::before {
+    background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  }
+  .step-body:hover { box-shadow: 0 6px 30px #1a6b4a18; }
+
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .step-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+  }
+  .step-tag {
+    background: var(--emerald-pale);
+    color: var(--emerald);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: 1px solid var(--emerald-glow);
+  }
+  .step-tag.gold { background: #fdf4e0; color: #8a6200; border-color: var(--gold-light); }
+  .step-tag.in-person { background: #fff3e8; color: #a05a00; border-color: #f4c48a; }
+
+  .step-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .bullet-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+  .bullet-list li::before {
+    content: '▸';
+    color: var(--emerald-light);
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .bullet-list li strong { color: var(--emerald); font-weight: 600; }
+
+  .sub-list {
+    list-style: none;
+    margin-top: 4px;
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sub-list li {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    display: flex;
+    gap: 8px;
+  }
+  .sub-list li::before { content: '–'; color: var(--gold); flex-shrink: 0; }
+
+  .alert-box {
+    background: #fff8ec;
+    border: 1px solid var(--gold-light);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: #7a5500;
+    line-height: 1.65;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .alert-box::before { content: '⚠'; flex-shrink: 0; }
+
+  .info-box {
+    background: var(--emerald-pale);
+    border: 1px solid var(--emerald-glow);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--emerald);
+    line-height: 1.65;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .info-box::before { content: 'ℹ'; flex-shrink: 0; }
+
+  .time-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--dark);
+    color: var(--emerald-glow);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+  .time-chip::before { content: '⏱'; font-size: 12px; }
+
+  .insurance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .ins-card {
+    background: var(--emerald-pale);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .ins-card h4 {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--emerald);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .ins-card p { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--dark);
+    padding: 36px 40px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .footer p { color: var(--emerald-glow); font-size: 13px; line-height: 1.8; }
+  .footer strong { color: var(--gold-light); }
+  .footer-logo {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .footer-logo span { color: var(--emerald-light); }
+
+  @media (max-width: 600px) {
+    .step-row { grid-template-columns: 52px 1fr; gap: 0 12px; }
+    .step-num { width: 40px; height: 40px; font-size: 16px; }
+    .step-body { padding: 16px 16px 18px; }
+    .insurance-grid { grid-template-columns: 1fr; }
+    .header { padding: 40px 20px 36px; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .step-row { animation: fadeUp .5s ease both; }
+  .step-row:nth-child(1)  { animation-delay: .05s; }
+  .step-row:nth-child(2)  { animation-delay: .10s; }
+  .step-row:nth-child(3)  { animation-delay: .15s; }
+  .step-row:nth-child(4)  { animation-delay: .20s; }
+  .step-row:nth-child(5)  { animation-delay: .25s; }
+  .step-row:nth-child(6)  { animation-delay: .30s; }
+  .step-row:nth-child(7)  { animation-delay: .35s; }
+  .step-row:nth-child(8)  { animation-delay: .40s; }
+  .step-row:nth-child(9)  { animation-delay: .45s; }
+  .step-row:nth-child(10) { animation-delay: .50s; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">患者指南 · Patient Guide</div>
+  <h1>正畸治疗全流程指南<br><span>Emerald City Ortho</span></h1>
+  <p class="header-sub">详细了解您的每一步治疗流程</p>
+  <div class="header-deco">
+    <span></span>
+    <i>🦷</i>
+    <span></span>
+  </div>
+</div>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  亲爱的患者，为了确保您的治疗过程顺利进行，我们为您准备了这份详细的治疗流程指南。<strong>请仔细阅读每个步骤</strong>，如有任何问题，欢迎随时通过短信或电子邮件联系我们！😊
+</div>
+
+<div class="page">
+
+  <div class="section-label">
+    <p>请按顺序完成以下步骤</p>
+    <h2>十步开启您的完美笑容之旅</h2>
+  </div>
+
+  <div class="steps">
+
+    <!-- 步骤 1 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">1</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">审阅并签署治疗合同 📄</div>
+          <div class="step-tag">在线完成</div>
+        </div>
+        <p class="step-desc">我们将通过链接发送您的治疗合同，其中包含所有治疗细节、付款安排及诊所政策。请仔细阅读并确认所有内容。</p>
+        <ul class="bullet-list">
+          <li>合同涵盖<strong>治疗细节</strong>、付款安排及诊所政策</li>
+          <li>签署前如有疑问，随时咨询我们</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 步骤 2 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">2</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">选择付款方式 💳</div>
+          <div class="step-tag">在线 / 短信 / 电话</div>
+        </div>
+        <p class="step-desc">签署合同后，您需要选择付款方式。我们提供以下两种选择：</p>
+        <ul class="bullet-list">
+          <li><strong>全额付款</strong> — 可使用任何付款方式一次性支付全部费用</li>
+          <li><strong>分期付款</strong> — 需要先支付首付款（可使用任意付款方式）
+            <ul class="sub-list">
+              <li>每月分期付款将通过 <strong>ACH 账户</strong>自动扣款</li>
+              <li><em>暂不支持</em>信用卡用于分期付款</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 步骤 3 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">3</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">设计您的个性化治疗方案 🧑‍⚕️</div>
+          <div class="step-tag">医生审核</div>
+        </div>
+        <p class="step-desc">收到您的签署合同后，我们的医生团队将详细分析您的情况，并为您定制最佳的正畸方案。</p>
+        <ul class="bullet-list">
+          <li><strong>两位医生</strong>将共同审阅您的案例</li>
+          <li>制定专属于您的最优治疗方案</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 步骤 4 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">4</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">牙齿健康检查 🦷✅</div>
+          <div class="step-tag">治疗前准备</div>
+        </div>
+        <p class="step-desc">在开始治疗之前，我们需要确保您的口腔健康状况良好，建议您完成以下检查：</p>
+        <ul class="bullet-list">
+          <li>补好所有<strong>龋齿（蛀牙）</strong></li>
+          <li>进行全面的<strong>牙齿清洁</strong></li>
+          <li>若您在过去 <strong>6 个月</strong>内未看过牙医，建议先进行一次口腔检查</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 步骤 5 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">5</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">记录预约 📸</div>
+          <div class="step-tag in-person">需到诊所</div>
+        </div>
+        <p class="step-desc">我们将安排一次复诊，以更新您的口腔记录，内容包括：</p>
+        <ul class="bullet-list">
+          <li>额外拍摄<strong>牙齿照片</strong></li>
+          <li><strong>3D CBCT X 光扫描</strong>，用于检查牙齿、牙根及颌骨健康状况</li>
+          <li>如果您有牙科保险，我们将代表您<strong>提交 CBCT 保险申请</strong>
+            <ul class="sub-list">
+              <li>报销结果取决于保险公司，不影响您的整体治疗费用</li>
+            </ul>
+          </li>
+          <li>若自首次咨询以来做过新的牙科治疗，可能需要<strong>再次 3D 扫描</strong>以确保矫正器精准匹配</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 步骤 6 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">6</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">牙齿矫正器的制作 🛠️</div>
+          <div class="step-tag">实验室制作</div>
+        </div>
+        <p class="step-desc">完成记录预约后，我们将开始制作您的定制矫正器，严格按照您的牙齿状况进行精细打造，以确保最佳效果。</p>
+        <div class="time-chip">通常需要 4–6 周完成制作</div>
+      </div>
+    </div>
+
+    <!-- 步骤 7 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num gold">7</div>
+      </div>
+      <div class="step-body gold-accent">
+        <div class="step-header">
+          <div class="step-title">需要拔牙的患者 — LightForce / 金属牙套 🔧</div>
+          <div class="step-tag gold">如需拔牙</div>
+        </div>
+        <p class="step-desc">对于需要在金属牙套或 LightForce 矫正器前进行拔牙的患者：</p>
+        <ul class="bullet-list">
+          <li>请<strong>等待</strong>我们团队最终确定您的治疗方案后，再安排拔牙</li>
+          <li>我们在发送<strong>拔牙转诊信</strong>给您的牙医后会通知您</li>
+          <li>建议在<strong>佩戴牙套前 1–2 周</strong>内完成拔牙</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 步骤 8 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">8</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">佩戴矫正器 — Bonding Visit 💎</div>
+          <div class="step-tag in-person">需到诊所 · 60 分钟</div>
+        </div>
+        <p class="step-desc">这是正式佩戴矫正器的重要一步！期间我们将：</p>
+        <ul class="bullet-list">
+          <li><strong>安装矫正器</strong>并确保佩戴舒适</li>
+          <li>教您如何正确<strong>清洁和护理</strong>矫正器</li>
+          <li>解答您的所有问题，处理任何不适感</li>
+        </ul>
+        <div class="alert-box">
+          请准时到达，此预约需要整整 60 分钟。如需改期，请<strong>至少提前 48 小时</strong>通知我们。定制材料已为您的预约日期专门准备，若当天未使用将需丢弃，可能产生<strong>额外费用</strong>。
+        </div>
+      </div>
+    </div>
+
+    <!-- 步骤 9 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num gold">9</div>
+      </div>
+      <div class="step-body gold-accent">
+        <div class="step-header">
+          <div class="step-title">需要拔牙的患者 — 隐适美 Invisalign 🔧</div>
+          <div class="step-tag gold">如需拔牙</div>
+        </div>
+        <p class="step-desc">对于使用隐适美需要拔牙的患者，时间安排与金属牙套患者<strong>相反</strong>：</p>
+        <ul class="bullet-list">
+          <li>请在<strong>隐适美粘附件日（领取牙套当天）之后</strong>再安排拔牙</li>
+          <li>建议在粘附件后的<strong>4 周内</strong>完成拔牙</li>
+        </ul>
+        <div class="info-box">注意：隐适美患者的拔牙顺序与金属/LightForce 牙套患者相反——先佩戴，后拔牙。</div>
+      </div>
+    </div>
+
+    <!-- 步骤 10 -->
+    <div class="step-row">
+      <div class="step-spine">
+        <div class="step-num">10</div>
+      </div>
+      <div class="step-body">
+        <div class="step-header">
+          <div class="step-title">保险报销流程 🏦</div>
+          <div class="step-tag">我们全程代办</div>
+        </div>
+        <p class="step-desc">我们将全程为您处理保险申请，您无需担心！请注意以下几点：</p>
+        <div class="insurance-grid">
+          <div class="ins-card">
+            <h4>保险覆盖要求</h4>
+            <p>为获得最大报销额度，需在<strong>整个治疗期间</strong>保持有效保险覆盖。</p>
+          </div>
+          <div class="ins-card">
+            <h4>处理时间</h4>
+            <p>保险理赔通常需要 <strong>4–8 周</strong>，具体取决于保险公司。</p>
+          </div>
+          <div class="ins-card">
+            <h4>关于 EOB 说明</h4>
+            <p>EOB 上的金额<strong>并非您需要支付的费用</strong>，仅说明保险对本次治疗的支持情况，无需担心。</p>
+          </div>
+          <div class="ins-card">
+            <h4>付款方式</h4>
+            <p>大多数保险公司按<strong>月、季度或年</strong>分期支付，而非一次性付款。</p>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:12px;">若您有<strong>多份保险</strong>，我们将在治疗结束时计算所有理赔金额，并退还多余部分（如有）。</div>
+      </div>
+    </div>
+
+  </div><!-- /steps -->
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">Emerald City <span>Ortho</span></div>
+  <p>我们始终在这里，陪伴您的正畸之旅！<br>
+  <strong>如有任何疑问，欢迎随时通过短信或电子邮件联系我们。</strong><br>
+  <span style="color:#5a7a65; font-size:12px;">hi@ecortho.io</span><br>
+  <span style="color:#5a7a65; font-size:12px; letter-spacing:1px;">让我们一起开启您的美丽微笑之旅！😁</span></p>
+</div>
+
+</body>
+</html>
